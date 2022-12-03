@@ -6,11 +6,22 @@ const port = process.env.PORT || 3000
 
 app.get('/abc', (req, res) => {
     console.log("Request ip ", req.ip);
-    res.send('HELLO WORLD EXPRESS JS >>> ' + new Date().toString())
+    res.send('A.B.C.D.E.F.G.H.I.J.K.L.M.N.O.P.Q.R.S.T.U.W.X.Y.Z')
+})
+
+app.get('/weather', (req, res) => {
+    console.log("Request ip ", req.ip);
+    res.send('Weather is >>> ' + "temperature: 19, Humadity: 09.9")
+})
+
+app.get('/time', (req, res) => {
+    console.log("Request ip ", req.ip);
+    res.send('Time & Date is >>> ' + new Date().toString())
 })
 
 const __dirname = path.resolve();
 app.use('/', express.static(path.join(__dirname, './web/dist')))
+app.use('*', express.static(path.join(__dirname, './web/dist')))
 
 
 app.listen(port, () => {
