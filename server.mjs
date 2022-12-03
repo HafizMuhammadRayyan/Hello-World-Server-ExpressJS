@@ -11,7 +11,11 @@ app.get('/abc', (req, res) => {
 
 app.get('/weather', (req, res) => {
     console.log("Request ip ", req.ip);
-    res.send('Weather is >>> ' + "temperature: 19, Humadity: 09.9")
+    res.send({
+        temperature: 28,
+        Humidity: 72,
+        ServerTime: new Date().toString()
+    })
 })
 
 app.get('/time', (req, res) => {
