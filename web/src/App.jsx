@@ -19,7 +19,7 @@ function App() {
     e.preventDefault();
 
     axios
-      .get(`http://localhost:3000/weather/${city}`)
+      .get(`http://hello-express.cyclic.app/weather/${city}`)
       .then((res) => {
         setWeatherData(res.data);
         console.log("res >>>>", res.data);
