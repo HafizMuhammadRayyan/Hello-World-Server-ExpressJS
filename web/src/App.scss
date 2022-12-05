@@ -1,0 +1,243 @@
+:root {
+  --rad: 1rem;
+  --dur: .3s;
+  --color-dark: rgb(22, 22, 22);
+  --color-light: #fff;
+  --color-brand: #4169e1;
+  --font-fam: 'Poppins', sans-serif;
+  --height: 3rem;
+  --btn-width: 6rem;
+  --bez: cubic-bezier(0, 0, 0.43, 1.49);
+}
+
+@mixin border {
+  border: 1px solid red;
+}
+
+@mixin flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@mixin glass {
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.3px);
+  -webkit-backdrop-filter: blur(5.3px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+
+.weatherPage {
+  width: 100%;
+  min-height: 100vh;
+  @include flex-c;
+  justify-content: flex-start;
+  color: white;
+
+  // background gradient
+  background: #00c6ff;
+  background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);
+  background: linear-gradient(to right, #0072ff, #00c6ff);
+
+
+
+  .search {
+    // @include border;
+    width: 100%;
+    height: 100px;
+    @include flex;
+    align-items: flex-end;
+
+
+    form {
+      position: relative;
+      width: 400px;
+      background: var(--color-brand);
+      border-radius: var(--rad);
+    }
+
+    input,
+    button {
+      height: var(--height);
+      font-family: var(--font-fam);
+      border: 0;
+      color: var(--color-dark);
+      font-size: 1rem;
+    }
+
+    input[type="search"] {
+      outline: 0; // <-- shold probably remove this for better accessibility, adding for demo aesthetics for now.
+      width: 100%;
+      background: var(--color-light);
+      padding: 0 1.6rem;
+      border-radius: var(--rad);
+      appearance: none; //for iOS input[type="search"] roundedness issue. border-radius alone doesn't work
+      transition: all var(--dur) var(--bez);
+      transition-property: width, border-radius;
+      z-index: 1;
+      position: relative;
+    }
+
+    button {
+      display: none; // prevent being able to tab to it
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: var(--btn-width);
+      font-weight: bold;
+      background: var(--color-brand);
+      border-radius: 0 var(--rad) var(--rad) 0;
+      color: #fff;
+    }
+
+    input:not(:placeholder-shown) {
+      border-radius: var(--rad) 0 0 var(--rad);
+      width: calc(100% - var(--btn-width));
+
+      +button {
+        display: block;
+      }
+    }
+
+    label {
+      position: absolute;
+      clip: rect(1px, 1px, 1px, 1px);
+      padding: 0;
+      border: 0;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+    }
+
+  }
+
+
+  .weatherCard {
+    @include flex-c;
+    gap: 20px;
+    width: 100%;
+    height: calc(100vh - 100px);
+
+    .todayWeather {
+      @include glass;
+      @include flex-c;
+      padding: 30px;
+      width: 600px;
+      height: 350px;
+
+
+      .first {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 5px;
+
+        h1 {
+          font-size: 3.2rem;
+          text-transform: uppercase;
+        }
+
+        div {
+          @include flex;
+          font-size: 2rem;
+          font-weight: 200;
+          gap: 10px;
+
+
+          .min,
+          .max {
+            display: flex;
+            gap: 0px;
+          }
+        }
+
+      }
+
+      .second {
+        width: 100%;
+        @include flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .second_one {
+          @include flex-c;
+          align-items: flex-start;
+          font-weight: 100;
+          gap: 2px;
+
+          .day {
+            font-size: 2.2rem;
+          }
+
+          .date {
+            font-size: 1.7rem;
+          }
+
+          .wind {
+            font-size: 1.5rem;
+          }
+
+          .drop {
+            font-size: 1.5rem;
+            margin-top: 12px;
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+          }
+        }
+
+        .second_two {
+          font-size: 2rem;
+          @include flex-c;
+
+          span {
+            font-weight: 200;
+            font-size: 2.3rem;
+            margin-top: 5px;
+          }
+
+        }
+
+        .second_third {
+          font-size: 8rem;
+          font-weight: 600;
+        }
+      }
+
+    }
+
+    .weekWeather {
+      @include flex;
+      @include glass;
+      width: 600px;
+      height: 130px;
+      padding: 10px;
+
+      div {
+        width: 20%;
+        height: 100%;
+        @include flex-c;
+        justify-content: space-between;
+
+        p {
+          font-weight: 200;
+          font-size: 18px;
+        }
+
+      }
+    }
+  }
+
+}
